@@ -14,7 +14,6 @@ export function createStore<T>(initial: T) {
       const [s, d] = useState(state);
       if (!dispatchList.has(d)) {
           dispatchList.add(d);
-          console.log(dispatchList.size)
       }
 
       useEffect(() => {
