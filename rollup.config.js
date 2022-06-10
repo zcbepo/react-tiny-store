@@ -4,7 +4,7 @@ export default {
     input: 'src/index.ts',
     output: [
         {
-            file: 'lib/store.prod.js',
+            file: 'lib/index.prod.js',
             format: 'cjs',
             exports: 'auto',
             plugins: [
@@ -12,7 +12,7 @@ export default {
             ]
         },
         {
-            file: 'lib/store.js',
+            file: 'lib/index.js',
             format: 'cjs',
             exports: 'auto',
         }
