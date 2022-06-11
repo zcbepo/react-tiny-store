@@ -3,71 +3,47 @@ An easier way to share state between React Components
 ## Installing
 Using npm:
 ```bash
-npm install react-tiny-store
+npm install react-tiny-store --save
 ```
 
 Using yarn:
 ```bash
-yarn add react-tiny-store
+yarn add react-tiny-store --save
 ```
 
 ## Example
-Using Javascript
+
+### store
 ```javascript
 import { createStore } from 'react-tiny-store'
-const useCounterStore = createStore({count: 1})
 
-// in you React Components
-function ComponentA() {
-    const [state] = useCounterStore()
-    return <div>{`double: ${state.count * 2}`}</div>
-}
+const useCounterStore = createStore({count: 1, base: 0})
 
-function ComponentB() {
-    const [state, set] = useCounterStore()
-    return <>
+function Component() {
+    const [state, setState] = useCounterStore()
+    return (
         <button
-            onClick={() => set({ count: state.count + 1 })}
-        >
-        {`count: ${state.count}`}</button>
-    </>
+            onClick={() => setState({ count: state.count + 1 })} // you can only set partial state
+        >{`count: ${state.base + state.count}`}</button>
+    )
 }
 ```
+### reactive-store
+```javascript
+import { createReactiveStore } from "react-tiny-store"
 
-Using Typescript
-```typescript
-import { createStore } from 'react-tiny-store'
+const useReactiveStore = createReactiveStore({
+    counter: {
+        count: 1 
+    } 
+})
 
-interface User {
-    id: number
-    name: string
-}
-
-interface UserState {
-    userList: User[]
-    loading: boolean
-}
-
-const useUserStore = createStore<UserState>({ userList: [], loading: false })
-
-// in you React Components
-function ComponentA() {
-    const [{loading, userList}, setState] = useUserStore()
-    useEffect(() => {
-        setState({loading: true})
-        getUserList()
-        .then(list => {
-            setState({userList: list})
-        })
-        .finally(() => {
-            setState({loading: false})
-        })
-    }, [])
-    
-    if (loading) return <p>loading...</p>
-    
-    return <ul>
-        {userList.map(user => <li key={user.id}>{user.name}</li>)}
-    </ul>
+function Component() {
+    const state = useReactiveStore()
+    return (
+        <button 
+            onClick={() => state.counter.count ++}
+            >{`count: ${state.counter.count}`}</button>
+    )
 }
 ```
