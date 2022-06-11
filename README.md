@@ -13,7 +13,7 @@ yarn add react-tiny-store --save
 
 ## Example
 
-### store
+### Store
 ```javascript
 import { createStore } from 'react-tiny-store'
 
@@ -28,7 +28,7 @@ function Component() {
     )
 }
 ```
-### reactive-store
+### Reactive Store
 ```javascript
 import { createReactiveStore } from "react-tiny-store"
 
