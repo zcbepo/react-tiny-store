@@ -38,11 +38,9 @@ export function createReactiveStore<T extends object>(initial: T) {
     }
     const reactiveState = createReactiveObject(state, batchUpdate)
 
-    return function useStore(key?: string): T {
+    return function useStore(): T {
         const [, update] = useReducer((num: number) => (num + 1) % 1000, 0);
-        console.log('run useStore ' + key)
         if (!dispatchList.has(update)) {
-            console.log('push update')
             dispatchList.add(update);
         }
 
