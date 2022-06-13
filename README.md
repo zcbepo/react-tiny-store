@@ -47,3 +47,21 @@ function Component() {
     )
 }
 ```
+
+### useReactive
+```javascript
+import { useReactive } from "react-tiny-store"
+
+function Component() {
+    const state = useReactive({
+        counter: {
+            count: 1
+        }
+    })
+    return (
+        <button 
+            onClick={() => state.counter.count ++}
+            >{`count: ${state.counter.count}`}</button>
+    )
+}
+```
