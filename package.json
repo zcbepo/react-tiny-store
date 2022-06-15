@@ -6,6 +6,9 @@
   "author": "zcbepo",
   "description": "Tiny Store For React Apps Using Hooks Api",
   "license": "MIT",
+  "files": [
+    "/lib"
+  ],
   "keywords": [
     "react",
     "hooks",
