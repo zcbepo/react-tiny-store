@@ -1,5 +1,5 @@
-import { useReducer, useEffect, DispatchWithoutAction } from 'react';
-import { createReactiveObject } from './utils';
+import { DispatchWithoutAction } from 'react';
+import { createReactiveObject, debounce, useUnmount, useUpdate } from './utils';
 
 export function createReactiveStore<T extends object>(initial: T) {
     let state = initial
@@ -7,19 +7,15 @@ export function createReactiveStore<T extends object>(initial: T) {
     const batchUpdate: DispatchWithoutAction = () => {
         dispatchList.forEach(dispatch => dispatch())
     }
-    const reactiveState = createReactiveObject(state, batchUpdate)
+    const reactiveState = createReactiveObject(state, debounce(batchUpdate))
 
     return function useStore(): T {
-        const [, update] = useReducer((num: number) => (num + 1) % 1000, 0);
+        const update = useUpdate()
         if (!dispatchList.has(update)) {
             dispatchList.add(update);
         }
 
-        useEffect(() => {
-            return () => {
-                dispatchList.delete(update)
-            }
-        }, [])
+        useUnmount(() => dispatchList.delete(update))
 
         return reactiveState;
     }

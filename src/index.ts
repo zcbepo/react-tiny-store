@@ -1,3 +1,3 @@
 export * from './store'
-export * from './reactive_store'
+export * from './reactiveStore'
 export * from './useReactive'
