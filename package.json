@@ -1,6 +1,6 @@
 {
   "name": "react-tiny-store",
-  "version": "0.0.12",
+  "version": "0.0.13",
   "main": "index.js",
   "types": "./lib/index.d.ts",
   "author": "zcbepo",
